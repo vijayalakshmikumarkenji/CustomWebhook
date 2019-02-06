@@ -85,7 +85,7 @@ restService.post('/echo', (req, res) => {
             
             return res.json({
                 fulfillmentText: movie,
-                fulfillmentText: speech,
+                fulfillmentText: movie,
                 source: 'dialog-flow-webhook-1'
             });
         });
