@@ -51,7 +51,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 });*/
 
 "use strict";
-const http = require('http');
+const https = require('https');
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -74,8 +74,8 @@ restService.post('/echo', (req, res) => {
       ? req.body.result.parameters.echoText
       : "Seems like some problem. Speak again.";
 
-    const reqUrl = encodeURI(`http://sb.ftdmobileapi.com/user/exists?email=baymaxalam%40gmail.com&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0`);
-    http.post(reqUrl, (responseFromAPI) => {
+    const reqUrl = encodeURI(`https://sb.ftdmobileapi.com/user/exists?email=baymaxalam%40gmail.com&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0`);
+    https.post(reqUrl, (responseFromAPI) => {
         let completeResponse = '';
         responseFromAPI.on('data', (chunk) => {
             completeResponse += chunk;
