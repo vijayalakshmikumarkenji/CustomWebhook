@@ -65,7 +65,7 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post('/echo', function(req, res) => {
+restService.post('/echo', (req, res) => {
 
     var speech =
     req.body.result &&
