@@ -23,7 +23,7 @@ restService.post("/echo", function(req, res) {
   return res.json({
     text: speech,
     displayText: speech,
-    source: "webhook-echo-sample"
+    source: "dialog-flow-webhook-1"
   });
 });
 
