@@ -74,7 +74,7 @@ restService.post('/echo', (req, res) => {
       ? req.body.result.parameters.echoText
       : "Seems like some problem. Speak again.";
 
-    const reqUrl = encodeURI(`https://sb.ftdmobileapi.com/user/exists?email=baymaxalam%40gmail.com&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0`);
+    const reqUrl = encodeURI(`https://sb.ftdmobileapi.com/user/exists?email=baymaxalam@gmail.com&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0`);
     https.get(reqUrl, (responseFromAPI) => {
         let completeResponse = '';
         responseFromAPI.on('data', (chunk) => {
@@ -82,7 +82,8 @@ restService.post('/echo', (req, res) => {
         });
         responseFromAPI.on('end', () => {
             const movie = JSON.parse(completeResponse);
-             console.log("output---------: " + movie);
+             console.log("output---------: " + movie.reference);
+             console.log("output---------: " + movie.success);
             return res.json({
                 fulfillmentText: movie.reference,
                 fulfillmentText: movie.reference,
