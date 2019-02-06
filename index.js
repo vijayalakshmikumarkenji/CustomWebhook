@@ -14,41 +14,6 @@
  * limitations under the License.
  */
 
-/**'use strict';
-
-const {
-    WebhookClient
-} = require('dialogflow-fulfillment');
-const http = require('http');
-const serviceAccount = {}; // The JSON object looks like: { "type": "service_account", ... }
-
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-    const agent = new WebhookClient({
-        request,
-        response
-    });
-
-    function makeAppointment(agent) {
-        http.post('http://sb.ftdmobileapi.com/user/exists?email=baymaxalam%40gmail.com&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0', (resp) => {
-            let data = '';
-            // A chunk of data has been recieved.
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-            // The whole response has been received. Print out the result.
-            resp.on('end', () => {
-                console.log(JSON.parse(data).explanation);
-                agent.add(JSON.parse(data).explanation);
-            });
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
-        });
-    }
-
-    let intentMap = new Map();
-    intentMap.set('intent.emailid', makeAppointment); // It maps the intent 'Make Appointment' to the function 'makeAppointment()'
-    agent.handleRequest(intentMap);
-});*/
 
 "use strict";
 const https = require('https');
