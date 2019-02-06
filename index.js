@@ -84,8 +84,8 @@ restService.post('/echo', (req, res) => {
             const movie = JSON.parse(completeResponse);
              console.log("output---------: " + movie);
             return res.json({
-                fulfillmentText: movie,
-                fulfillmentText: movie,
+                fulfillmentText: movie.reference,
+                fulfillmentText: movie.reference,
                 source: 'dialog-flow-webhook-1'
             });
         });
