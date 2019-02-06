@@ -1,5 +1,5 @@
 {
-  "name": "webhook-echo-sample",
+  "name": "dialog-flow-webhook-1",
   "version": "1.0.0",
   "description": "Webhook echo sample",
   "main": "index.js",
