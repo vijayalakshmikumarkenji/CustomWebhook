@@ -82,7 +82,7 @@ restService.post('/echo', (req, res) => {
         });
         responseFromAPI.on('end', () => {
             const movie = JSON.parse(completeResponse);
-            
+             console.log("output---------: " + movie);
             return res.json({
                 fulfillmentText: movie,
                 fulfillmentText: movie,
