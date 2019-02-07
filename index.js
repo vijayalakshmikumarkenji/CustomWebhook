@@ -23,35 +23,43 @@ const bodyParser = require("body-parser");
 const restService = express();
 
 restService.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
+    bodyParser.urlencoded({
+        extended: true
+    })
 );
 
 restService.use(bodyParser.json());
 
 restService.post('/echo', (req, res) => {
 
-    var speech =
-    req.body.result &&
-    req.body.result.parameters &&
-    req.body.result.parameters.echoText
-      ? req.body.result.parameters.echoText
-      : "Seems like some problem. Speak again.";
+    var email_id =
+        req.body.result &&
+            req.body.result.parameters &&
+            req.body.result.parameters.email
+            ? req.body.result.parameters.email
+            : "Seems like some problem. No user exists on DB";
+    var target_url = "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0";
+    console.log("email id is :" + email_id);
+    console.log("target url is :" + target_url);
 
-    const reqUrl = encodeURI(`https://sb.ftdmobileapi.com/user/exists?email=baymaxalam@gmail.com&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0`);
+    const reqUrl = encodeURI(target_url);
     https.get(reqUrl, (responseFromAPI) => {
         let completeResponse = '';
         responseFromAPI.on('data', (chunk) => {
             completeResponse += chunk;
         });
         responseFromAPI.on('end', () => {
-            const movie = JSON.parse(completeResponse);
-             console.log("output---------: " + movie.reference);
-             console.log("output---------: " + movie.success);
+            const user_exist_api = JSON.parse(completeResponse);
+            console.log("user_exist_api reference---------: " + user_exist_api.reference);
+            console.log("user_exist_api success---------: " + user_exist_api.success);
+            var fullfillment_messges = "Hi" + req.body.result.parameters.username
+                + "Congratulations you are an existing user"
+                + "Welcome to FTD world";
+
+
             return res.json({
                 fulfillmentText: movie.reference,
-                fulfillmentText: movie.reference,
+                fulfillmentMessages: fullfillment_messges,
                 source: 'dialog-flow-webhook-1'
             });
         });
@@ -64,9 +72,5 @@ restService.post('/echo', (req, res) => {
     });
 });
 
-
-restService.listen(process.env.PORT || 8000, function() {
-  console.log("Server up and listening");
-});
 
 
