@@ -23,16 +23,23 @@ restService.post("/echo", function (req, res) {
     const email_intent = 'intent.emailid';
     const user_name = 'username';
     let intentMap = new Map();
-    intentMap.set(email_intent, handleemailidrequest);
-    intentMap.set(user_name, handleemailidrequest);
+    intentMap.set(email_intent, handleEmailidRequest);
+    intentMap.set(user_name, handleUsernameRequest);
     agent.handleRequest(intentMap);
 
 });
 
-function handleemailidrequest(agent) {
+
+function handleUsernameRequest(agent){
+    console.log("username :" + agent.parameters.username);
+    const username = agent.parameters.username;
+}
+
+
+function handleEmailidRequest(agent) {
 
     console.log("email :" + agent.parameters.email);
-    console.log("username :" + agent.parameters.username);
+   
     var email_id = agent.parameters.email;
 
     var options = {
@@ -45,7 +52,7 @@ function handleemailidrequest(agent) {
         .then(result => {
             console.log(result.reference);
             if (result.reference == "ACCOUNT_EXISTS") {
-                agent.add("Hi you are already exist on FTD world :) Welcome :) How may I help you??");
+                agent.add("Hi "+ username+" you are already exist on FTD world :) Welcome :) How may I help you??");
             } else {
                 agent.add("You are new to FTD. Can I create an account for you");
             }
