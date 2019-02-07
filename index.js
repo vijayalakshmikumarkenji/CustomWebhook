@@ -58,7 +58,7 @@ restService.post('/intent.emailid', (req, res) => {
         
             return res.json({
                 fulfillmentText: user_exist_api.reference,
-                fulfillmentMessages: user_exist_api.success,
+                fulfillmentText: user_exist_api.reference,
                 source: 'dialog-flow-webhook-1'
             });
         });
