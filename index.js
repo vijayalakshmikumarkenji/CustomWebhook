@@ -30,7 +30,7 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post('/echo', (req, res) => {
+restService.post('/intent.emailid', (req, res) => {
     var email_id =
         req.body.result &&
             req.body.result.parameters &&
