@@ -36,7 +36,7 @@ restService.post('/echo', (req, res) => {
             req.body.result.parameters &&
             req.body.result.parameters.email
             ? req.body.result.parameters.email
-            : "baymaxalam@gmail.com";
+            : "Error";
     console.log("email from req:" + email_id);
  //   console.log("username from req:" + req.body.result.parameters.username);
 
