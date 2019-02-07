@@ -1,26 +1,12 @@
-/**
- * Copyright 2017 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-
 "use strict";
-const https = require('https');
+
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const { actionssdk } = require('actions-on-google');
+const { WebhookClient } = require('dialogflow-fulfillment');
 const restService = express();
+const request = require('request-promise-native');
+var username="";
 
 restService.use(
     bodyParser.urlencoded({
@@ -30,49 +16,55 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post('/intent.emailid', (req, res) => {
-    var email_id =
-        req.body.result &&
-            req.body.result.parameters &&
-            req.body.result.parameters.email
-            ? req.body.result.parameters.email
-            : "Error";
-    console.log("email from req:" + req.body.result);
- //   console.log("username from req:" + req.body.result.parameters.username);
+restService.post("/echo", function (req, res) {
+    //console.log('nouvelle requete');
+    //console.log(req.body);
+    const app = actionssdk();
+    const agent = new WebhookClient({ request: req, response: res });
+    const email_intent = 'intent.emailid';
+    const user_name = 'intent.username';
+    let intentMap = new Map();
+    intentMap.set(email_intent, handleEmailidRequest);
+    intentMap.set(user_name, handleUsernameRequest);
+    agent.handleRequest(intentMap);
 
-    var target_url = "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0";
-    console.log("email id is :" + email_id);
-    console.log("target url is :" + target_url);
-
-    const reqUrl = encodeURI(target_url);
-    https.get(reqUrl, (responseFromAPI) => {
-        let completeResponse = '';
-        responseFromAPI.on('data', (chunk) => {
-            completeResponse += chunk;
-        });
-        responseFromAPI.on('end', () => {
-            const user_exist_api = JSON.parse(completeResponse);
-            console.log("user_exist_api reference---------: " + user_exist_api.reference);
-            console.log("user_exist_api success---------: " + user_exist_api.success);
-           
-        
-            return res.json({
-                fulfillmentText: "Hi Congratulations you are existing user and welcome to FTD world",
-                fulfillmentText: "Hi Congratulations you are existing user and welcome to FTD world",
-                source: 'dialog-flow-webhook-1'
-            });
-        });
-    }, (error) => {
-        return res.json({
-            fulfillmentText: 'Something went wrong!',
-            fulfillmentText: 'Something went wrong!',
-            source: 'dialog-flow-webhook-1'
-        });
-    });
 });
 
-restService.listen(process.env.PORT || 8000, function () {
+
+function handleUsernameRequest(agent){
+    console.log("username :" + agent.parameters.username);
+    username = agent.parameters.username;
+    agent.add("Hi "+username+"Can I check whether Are you an existing user");
+    return Promise.resolve(agent);
+}
+
+
+function handleEmailidRequest(agent) {
+
+    console.log("email :" + agent.parameters.email);
+    console.log("username :" +username);
+   
+    var email_id = agent.parameters.email;
+
+    var options = {
+        uri: "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0"
+        ,
+        json: true
+    };
+
+    return request.get(options)
+        .then(result => {
+            console.log(result.reference);
+            if (result.reference == "ACCOUNT_EXISTS") {
+                agent.add("Hi "+ username+" you are already exist on FTD world :) Welcome :) How may I help you??");
+            } else {
+                agent.add("You are new to FTD. Can I create an account for you");
+            }
+
+            return Promise.resolve(agent);
+        });
+}
+
+restService.listen(process.env.PORT || 5001, function () {
     console.log("Server up and listening");
 });
-
-
