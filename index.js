@@ -30,7 +30,7 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post('/intent.emailid', (req, res) => {
+restService.post('/echo', (req, res) => {
     var email_id =
         req.body.result &&
             req.body.result.parameters &&
@@ -57,8 +57,8 @@ restService.post('/intent.emailid', (req, res) => {
            
         
             return res.json({
-                fulfillmentText: user_exist_api.reference,
-                fulfillmentText: user_exist_api.reference,
+                fulfillmentText: "Hi Congratulations you are existing user and welcome to FTD world",
+                fulfillmentText: "Hi Congratulations you are existing user and welcome to FTD world",
                 source: 'dialog-flow-webhook-1'
             });
         });
