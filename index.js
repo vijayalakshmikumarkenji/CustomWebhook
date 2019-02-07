@@ -32,6 +32,9 @@ restService.use(bodyParser.json());
 
 restService.post('/echo', (req, res) => {
 
+console.log("email from req:"+req.body.result.parameters.email);
+console.log("username from req:"+req.body.result.parameters.username);
+
     var email_id =
         req.body.result &&
             req.body.result.parameters &&
