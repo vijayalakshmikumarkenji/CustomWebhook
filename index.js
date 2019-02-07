@@ -6,7 +6,7 @@ const { actionssdk } = require('actions-on-google');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const restService = express();
 const request = require('request-promise-native');
-const username="";
+var username="";
 
 restService.use(
     bodyParser.urlencoded({
