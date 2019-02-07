@@ -38,8 +38,8 @@ restService.post('/echo', (req, res) => {
             ? req.body.result.parameters.email
             : "Seems like some problem. No user exists on DB";
     console.log("email from req:" + req.body.result.parameters.email);
-    console.log("username from req:" + req.body.result.parameters.username);
-    
+ //   console.log("username from req:" + req.body.result.parameters.username);
+
     var target_url = "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0";
     console.log("email id is :" + email_id);
     console.log("target url is :" + target_url);
@@ -54,7 +54,7 @@ restService.post('/echo', (req, res) => {
             const user_exist_api = JSON.parse(completeResponse);
             console.log("user_exist_api reference---------: " + user_exist_api.reference);
             console.log("user_exist_api success---------: " + user_exist_api.success);
-            var fullfillment_messges = "Hi" + req.body.result.parameters.username
+            var fullfillment_messges = "Hi" 
                 + "Congratulations you are an existing user"
                 + "Welcome to FTD world";
 
