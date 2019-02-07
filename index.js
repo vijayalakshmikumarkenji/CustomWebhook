@@ -21,7 +21,7 @@ restService.post("/echo", function (req, res) {
     const app = actionssdk();
     const agent = new WebhookClient({ request: req, response: res });
     const email_intent = 'intent.emailid';
-    const user_name = 'username';
+    const user_name = 'intent.username';
     let intentMap = new Map();
     intentMap.set(email_intent, handleEmailidRequest);
     intentMap.set(user_name, handleUsernameRequest);
