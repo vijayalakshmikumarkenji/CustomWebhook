@@ -30,7 +30,7 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post('/echo', (req, res) => {
+restService.post('/', (req, res) => {
     var email_id =
         req.body.result &&
             req.body.result.parameters &&
@@ -60,7 +60,7 @@ restService.post('/echo', (req, res) => {
 
 
             return res.json({
-                fulfillmentText: movie.reference,
+                fulfillmentText: user_exist_api.reference,
                 fulfillmentMessages: fullfillment_messges,
                 source: 'dialog-flow-webhook-1'
             });
