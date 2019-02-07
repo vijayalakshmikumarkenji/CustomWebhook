@@ -35,18 +35,15 @@ function handleemailidrequest(agent) {
     var speech = agent.query;
 
     var options = {
-        uri: "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0"
+        uri: "https://sb.ftdmobileapi.com/user/exists?email=" + "baymaxalam@gmail.com" + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0"
         ,
         json: true
     };
 
     return request.get(options)
         .then(result => {
-            console.log(result);
-
-            //message.addReply({ type: 'text', content: 'Désolé mais je n\'ai trouvé aucun résultat, tu peux réessayer avec un autre mot, phrase ou expression.' });
+            console.log(result);           
             agent.add("you are there");
-
             return Promise.resolve(agent);
         });
 }
