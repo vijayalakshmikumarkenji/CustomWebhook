@@ -31,16 +31,15 @@ restService.use(
 restService.use(bodyParser.json());
 
 restService.post('/echo', (req, res) => {
-
-console.log("email from req:"+req.body.result.parameters.email);
-console.log("username from req:"+req.body.result.parameters.username);
-
     var email_id =
         req.body.result &&
             req.body.result.parameters &&
             req.body.result.parameters.email
             ? req.body.result.parameters.email
             : "Seems like some problem. No user exists on DB";
+    console.log("email from req:" + req.body.result.parameters.email);
+    console.log("username from req:" + req.body.result.parameters.username);
+    
     var target_url = "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0";
     console.log("email id is :" + email_id);
     console.log("target url is :" + target_url);
@@ -75,8 +74,8 @@ console.log("username from req:"+req.body.result.parameters.username);
     });
 });
 
-restService.listen(process.env.PORT || 8000, function() {
+restService.listen(process.env.PORT || 8000, function () {
     console.log("Server up and listening");
-  });
-  
+});
+
 
