@@ -24,6 +24,7 @@ restService.post("/echo", function (req, res) {
     const user_name = 'username';
     let intentMap = new Map();
     intentMap.set(email_intent, handleemailidrequest);
+    intentMap.set(user_name, handleemailidrequest);
     agent.handleRequest(intentMap);
 
 });
