@@ -36,7 +36,7 @@ restService.post('/', (req, res) => {
             req.body.result.parameters &&
             req.body.result.parameters.email
             ? req.body.result.parameters.email
-            : "Seems like some problem. No user exists on DB";
+            : "baymaxalam@gmail.com";
     console.log("email from req:" + email_id);
  //   console.log("username from req:" + req.body.result.parameters.username);
 
