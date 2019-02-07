@@ -22,16 +22,14 @@ restService.post("/echo", function (req, res) {
     const agent = new WebhookClient({ request: req, response: res });
     const email_intent = 'intent.emailid';
     let intentMap = new Map();
-    intentMap.set('intent.emailid', handleemailidrequest);
-    // intentMap.set('<INTENT_NAME_HERE>', yourFunctionHandler);
-    // intentMap.set('<INTENT_NAME_HERE>', googleAssistantHandler);
+    intentMap.set('intent.emailid', handleemailidrequest);  
     agent.handleRequest(intentMap);
 
 });
 
 function handleemailidrequest(agent) {
 
-    console.log(agent.query);
+    console.log("query :"+agent.parameters.email);
     var speech = agent.query;
 
     var options = {
@@ -42,7 +40,7 @@ function handleemailidrequest(agent) {
 
     return request.get(options)
         .then(result => {
-            console.log(result);           
+            console.log(result.reference);           
             agent.add("you are there");
             return Promise.resolve(agent);
         });
