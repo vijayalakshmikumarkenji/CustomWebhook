@@ -34,6 +34,7 @@ function handleUsernameRequest(agent){
     console.log("username :" + agent.parameters.username);
     const username = agent.parameters.username;
     agent.add("Hi "+username,"Can I check whether Are you an existing user");
+    return Promise.resolve(agent);
 }
 
 
