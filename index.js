@@ -6,6 +6,7 @@ const { actionssdk } = require('actions-on-google');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const restService = express();
 const request = require('request-promise-native');
+const username;
 
 restService.use(
     bodyParser.urlencoded({
@@ -32,8 +33,8 @@ restService.post("/echo", function (req, res) {
 
 function handleUsernameRequest(agent){
     console.log("username :" + agent.parameters.username);
-    const username = agent.parameters.username;
-    agent.add("Hi "+username,"Can I check whether Are you an existing user");
+    username = agent.parameters.username;
+    agent.add("Hi "+username+"Can I check whether Are you an existing user");
     return Promise.resolve(agent);
 }
 
@@ -41,6 +42,7 @@ function handleUsernameRequest(agent){
 function handleEmailidRequest(agent) {
 
     console.log("email :" + agent.parameters.email);
+    console.log("username :" +username);
    
     var email_id = agent.parameters.email;
 
