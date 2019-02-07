@@ -21,27 +21,34 @@ restService.post("/echo", function (req, res) {
     const app = actionssdk();
     const agent = new WebhookClient({ request: req, response: res });
     const email_intent = 'intent.emailid';
+    const user_name = 'username';
     let intentMap = new Map();
-    intentMap.set('intent.emailid', handleemailidrequest);  
+    intentMap.set(email_intent, handleemailidrequest);
     agent.handleRequest(intentMap);
 
 });
 
 function handleemailidrequest(agent) {
 
-    console.log("query :"+agent.parameters.email);
-    var speech = agent.query;
+    console.log("email :" + agent.parameters.email);
+    console.log("username :" + agent.parameters.username);
+    var email_id = agent.parameters.email;
 
     var options = {
-        uri: "https://sb.ftdmobileapi.com/user/exists?email=" + "baymaxalam@gmail.com" + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0"
+        uri: "https://sb.ftdmobileapi.com/user/exists?email=" + email_id + "&uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0"
         ,
         json: true
     };
 
     return request.get(options)
         .then(result => {
-            console.log(result.reference);           
-            agent.add("you are there");
+            console.log(result.reference);
+            if (result.reference == "ACCOUNT_EXISTS") {
+                agent.add("Hi you are already exist on FTD world :) Welcome :) How may I help you??");
+            } else {
+                agent.add("You are new to FTD. Can I create an account for you");
+            }
+
             return Promise.resolve(agent);
         });
 }
