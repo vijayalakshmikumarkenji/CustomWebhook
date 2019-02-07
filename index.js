@@ -54,13 +54,11 @@ restService.post('/intent.emailid', (req, res) => {
             const user_exist_api = JSON.parse(completeResponse);
             console.log("user_exist_api reference---------: " + user_exist_api.reference);
             console.log("user_exist_api success---------: " + user_exist_api.success);
-            var fullfillment_messges_array = new array();
-            array.push = "Hi Congratulations you are an existing user Welcome to FTD world";
-
-            JSON.stringify(fullfillment_messges_array);
+           
+        
             return res.json({
                 fulfillmentText: user_exist_api.reference,
-                fulfillmentMessages: fullfillment_messges_array,
+                fulfillmentMessages: user_exist_api.success,
                 source: 'dialog-flow-webhook-1'
             });
         });
