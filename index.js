@@ -42,13 +42,13 @@ function handleagreedtoshowproductlist(agent) {
         result.categories.forEach(function (productlist) {
             var productlistName = productlist.title;
             finalProductList = productlistName + " "+finalProductList;
-            console.log("final product list is :" + finalProductList);
+            
         });
 
     }).catch(err => {
         console.error("Something wrong happened");
     })
-
+    console.log("final product list is :" + finalProductList);
     agent.add(finalProductList);
     return Promise.resolve(agent);
 }
