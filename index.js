@@ -40,13 +40,12 @@ function handleTypeOfGiftToOrder(agent) {
 
     request.get(options).then(result => {
 
-        result.products.forEach(async function (productlist) {
+        result.products.forEach(function (productlist) {
             var productlistName = productlist.name;
             var productPreviewUrl = productlist.preview_url;
-            agent.add("Select something from below gifts \n" + " Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);
-            console.log(productlistName);
+            agent.add("Select something from below gifts " + " Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);            
         });
-
+        
         return Promise.resolve(agent);
     }).catch((err) =>
         console.error('something went wrong on the handleTypeOfGiftToOrder: Error')
