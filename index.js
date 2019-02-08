@@ -41,15 +41,14 @@ function handleagreedtoshowproductlist(agent) {
     request.get(options).then(result => {
 
         result.categories.forEach(async function (productlist) {
-            var productlistName = productlist.title;
-           
+            var productlistName = productlist.title;     
         });
-        agent.add("Type any from the product list name to Order the product: " )
         return Promise.resolve(agent);
     }).catch(err => {
         console.error("Something wrong happened");
     })
-
+   // agent.add("Type any from the product list name to Order the product: " )
+//    return Promise.resolve(agent);
 
 }
 
