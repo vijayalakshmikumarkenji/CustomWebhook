@@ -31,7 +31,7 @@ restService.post("/echo", function (req, res) {
 //When user says yes to the question "Do you want to buy any gift" asked in intent.emailid
 function handleagreedtoshowproductlist(agent) {
     console.log("Enter handleTypeOfGiftToOrder :");
-    agent.add("Select something from below gifts ");
+    
 
     var options = {
         uri: "https://sb.ftdmobileapi.com/category/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
@@ -43,6 +43,7 @@ function handleagreedtoshowproductlist(agent) {
         result.categories.forEach(function (productlist) {
             var productlistName = productlist.title;     
         });
+        agent.add("Select something from below gifts ");
         return Promise.resolve(agent);
     }).catch(err => {
         console.error("Something wrong happened");
