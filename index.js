@@ -34,14 +34,14 @@ function handleagreedtoshowproductlist(agent) {
     //agent.add("Select something from below gifts ");
 
     var options = {
-        uri: "https://sb.ftdmobileapi.com/product/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
+        uri: "https://sb.ftdmobileapi.com/category/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
         json: true
     };
 
     request.get(options).then(result => {
 
-        result.products.forEach(async function (productlist) {
-            var productlistName = productlist.name;
+        result.catagories.forEach(async function (productlist) {
+            var productlistName = productlist.title;
             var finalproductlist = '';
             finalproductlist = finalproductlist + productlistName;
             console.log(finalproductlist);
@@ -76,7 +76,7 @@ function handleEmailidRequest(agent) {
         .then(result => {
             console.log(result.reference);
             if (result.reference == "ACCOUNT_EXISTS") {
-                agent.add("Hi " + username + " you are already exist on FTD world :) Welcome :) Do you want to buy any gift??");
+z                agent.add("Hi " + username + " you are already exist on FTD world :) Welcome :) Do you want to buy any gift??");
             } else {
                 agent.add("You are new to FTD. Can I create an account for you");
             }
