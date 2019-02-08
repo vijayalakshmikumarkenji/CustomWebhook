@@ -40,7 +40,7 @@ function handleagreedtoshowproductlist(agent) {
 
     request.get(options).then(result => {
 
-        result.catagories.forEach(async function (productlist) {
+        result.categories.forEach(async function (productlist) {
             var productlistName = productlist.title;
             var finalproductlist = '';
             finalproductlist = finalproductlist + productlistName;
