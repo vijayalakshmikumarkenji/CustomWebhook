@@ -44,6 +44,7 @@ function handleTypeOfGiftToOrder(agent) {
             var productlistName = productlist.name;
             var finalproductlist = '';
             finalproductlist = finalproductlist + ', ' + productlistName;
+            console.log(finalproductlist);
         });
         agent.add("Type any from the product list name to Order the product: "+finalproductlist)
         return Promise.resolve(agent);
