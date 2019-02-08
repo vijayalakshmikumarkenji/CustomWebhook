@@ -37,7 +37,7 @@ function handleTypeOfGiftToOrder(agent) {
         uri: "https://sb.ftdmobileapi.com/product/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
         json: true
     };
-    try {
+  
         request.get(options).then(result => {
 
             result.products.forEach(async function (productlist) {
@@ -49,11 +49,9 @@ function handleTypeOfGiftToOrder(agent) {
             agent.add("Type any from the product list name to Order the product: " + productlistName)
             return Promise.resolve(agent);
         }).catch(err => {
-            next(err);
+            console.error("Something wrong happened");
         })
-    } catch (e) {
-        console.error("outside catch :" + e);
-    }
+  
 
 }
 
