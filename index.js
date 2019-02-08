@@ -30,7 +30,7 @@ restService.post("/echo", function (req, res) {
 
 //When user says yes to the question "Do you want to buy any gift" asked in intent.emailid
 function handleTypeOfGiftToOrder(agent) {
-    console.log("Enter handleTypeOfGiftToOrder :" + utilConstants.base_url);
+    console.log("Enter handleTypeOfGiftToOrder :");
 
 
     var options = {
@@ -46,10 +46,11 @@ function handleTypeOfGiftToOrder(agent) {
             agent.add("Select something from below gifts \n" + " Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);
             console.log(productlistName);
         });
-        await Promise.reject(new Error('promise error'))
+
         return Promise.resolve(agent);
     }).catch((err) =>
-        console.error('something went wrong on the handleTypeOfGiftToOrder: Error'));
+        console.error('something went wrong on the handleTypeOfGiftToOrder: Error')
+    );
 
 
 }
