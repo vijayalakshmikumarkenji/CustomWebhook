@@ -39,9 +39,8 @@ function handleTypeOfGiftToOrder(agent) {
     };
 
     request.get(options).then(result => {
-        console.log("product lists json :" + result);
-
-        result.forEach(function (productlist) {
+        console.log("product lists json :" + result.products);
+        result.products.forEach(function (productlist) {
             var productlistName = productlist.name;
             console.log(productlistName);
         });
