@@ -76,7 +76,7 @@ function handleEmailidRequest(agent) {
         .then(result => {
             console.log(result.reference);
             if (result.reference == "ACCOUNT_EXISTS") {
-z                agent.add("Hi " + username + " you are already exist on FTD world :) Welcome :) Do you want to buy any gift??");
+                agent.add("Hi " + username + " you are already exist on FTD world :) Welcome :) Do you want to buy any gift??");
             } else {
                 agent.add("You are new to FTD. Can I create an account for you");
             }
