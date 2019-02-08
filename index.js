@@ -23,13 +23,13 @@ restService.post("/echo", function (req, res) {
     let intentMap = new Map();
     intentMap.set('intent.emailid', handleEmailidRequest);
     intentMap.set('intent.username', handleUsernameRequest);
-    intentMap.set('intent.emailid - yes', handleTypeOfGiftToOrder)
+    intentMap.set('intent.agreedtoshowproductlist', handleagreedtoshowproductlist)
     agent.handleRequest(intentMap);
 
 });
 
 //When user says yes to the question "Do you want to buy any gift" asked in intent.emailid
-function handleTypeOfGiftToOrder(agent) {
+function handleagreedtoshowproductlist(agent) {
     console.log("Enter handleTypeOfGiftToOrder :");
     //agent.add("Select something from below gifts ");
 
@@ -37,21 +37,21 @@ function handleTypeOfGiftToOrder(agent) {
         uri: "https://sb.ftdmobileapi.com/product/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
         json: true
     };
-  
-        request.get(options).then(result => {
 
-            result.products.forEach(async function (productlist) {
-                var productlistName = productlist.name;
-                var finalproductlist = '';
-                finalproductlist = finalproductlist + productlistName;
-             //   console.log(finalproductlist);
-            });
-            agent.add("Type any from the product list name to Order the product: " )
-            return Promise.resolve(agent);
-        }).catch(err => {
-            console.error("Something wrong happened");
-        })
-  
+    request.get(options).then(result => {
+
+        result.products.forEach(async function (productlist) {
+            var productlistName = productlist.name;
+            var finalproductlist = '';
+            finalproductlist = finalproductlist + productlistName;
+            console.log(finalproductlist);
+        });
+        agent.add("Type any from the product list name to Order the product: " + finalproductlist)
+        return Promise.resolve(agent);
+    }).catch(err => {
+        console.error("Something wrong happened");
+    })
+
 
 }
 
