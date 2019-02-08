@@ -39,9 +39,10 @@ function handleTypeOfGiftToOrder(agent) {
     };
 
     request.get(options).then(result => {
-        console.log("product lists json :" + result.products);
         result.products.forEach(function (productlist) {
             var productlistName = productlist.name;
+            var productPreviewUrl = productlist.preview_url;
+            agent.add(" Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);
             console.log(productlistName);
         });
 
