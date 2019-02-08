@@ -42,9 +42,7 @@ function handleagreedtoshowproductlist(agent) {
 
         result.categories.forEach(async function (productlist) {
             var productlistName = productlist.title;
-            var finalproductlist = '';
-            finalproductlist = finalproductlist + productlistName;
-            console.log(finalproductlist);
+           
         });
         agent.add("Type any from the product list name to Order the product: " )
         return Promise.resolve(agent);
