@@ -41,7 +41,7 @@ function handleagreedtoshowproductlist(agent) {
 
         result.categories.forEach(function (productlist) {
             var productlistName = productlist.title;
-            finalProductList = productlistName + finalProductList;
+            finalProductList = productlistName + " "+finalProductList;
             console.log("final product list is :" + finalProductList);
         });
 
@@ -49,7 +49,7 @@ function handleagreedtoshowproductlist(agent) {
         console.error("Something wrong happened");
     })
 
-    agent.add("Select something from below gifts :" + finalProductList);
+    agent.add(finalProductList);
     return Promise.resolve(agent);
 }
 
