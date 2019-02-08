@@ -32,7 +32,6 @@ restService.post("/echo", function (req, res) {
 function handleagreedtoshowproductlist(agent) {
     console.log("Enter handleTypeOfGiftToOrder :");
 
-
     var options = {
         uri: "https://sb.ftdmobileapi.com/category/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
         json: true
@@ -48,7 +47,7 @@ function handleagreedtoshowproductlist(agent) {
         console.error("Something wrong happened");
     })
 
-    agent.add("Select something from below gifts ");
+    agent.add("Select something from below gifts :"+productlistName);
     return Promise.resolve(agent);
 }
 
