@@ -40,10 +40,10 @@ function handleTypeOfGiftToOrder(agent) {
 
     request.get(options).then(result => {
         console.log("product lists json :" + result);
-        console.log("product lists json :" + JSON.parse(result).length);
-
+        let productList = JSON.parse(result);
+        console.log("product lists json :" + productList);
         return Promise.resolve(agent);
-    });
+    }).catch((err) => console.error('something went wrong on the handleTypeOfGiftToOrder: Error'));
 
 
 }
@@ -75,7 +75,8 @@ function handleEmailidRequest(agent) {
             }
 
             return Promise.resolve(agent);
-        });
+        }).catch((err) => console.error('something went wrong on the handleEmailidRequest: Error'));
+        
 }
 
 restService.listen(process.env.PORT || 5001, function () {
