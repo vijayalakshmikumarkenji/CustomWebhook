@@ -49,7 +49,7 @@ function handleagreedtoshowproductlist(agent) {
         console.error("Something wrong happened");
     })
 
-    agent.add("Select something from below gifts :" + productlistName);
+    agent.add("Select something from below gifts :" + finalProductList);
     return Promise.resolve(agent);
 }
 
