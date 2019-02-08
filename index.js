@@ -40,7 +40,7 @@ function handleTypeOfGiftToOrder(agent) {
 
     request.get(options).then(result => {
 
-        result.products.forEach(function (productlist) {
+        result.products.forEach(async function (productlist) {
             var productlistName = productlist.name;
             var finalproductlist = '';
             finalproductlist = finalproductlist + ', ' + productlistName;
@@ -48,8 +48,9 @@ function handleTypeOfGiftToOrder(agent) {
         });
         agent.add("Type any from the product list name to Order the product: "+finalproductlist)
         return Promise.resolve(agent);
-    }).catch((err) => console.error('something went wrong on the handleTypeOfGiftToOrder: Error')
-    );
+    }).catch(err => {
+        next(err);
+    } ) 
 
 
 }
