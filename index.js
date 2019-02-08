@@ -31,7 +31,7 @@ restService.post("/echo", function (req, res) {
 //When user says yes to the question "Do you want to buy any gift" asked in intent.emailid
 function handleTypeOfGiftToOrder(agent) {
     console.log("Enter handleTypeOfGiftToOrder :" + utilConstants.base_url);
-    agent.add("Select something from below gifts \n");
+  
 
     var options = {
         uri: "https://sb.ftdmobileapi.com/product/list?uid=9MFPAH0OROD6VDEWEWQWTZYNB5NKML467RXO9WDMS9MIL122RM&type=android&appversion=11.0.0&app=sharisberries_android&design=1&scale=3.0",
@@ -39,13 +39,13 @@ function handleTypeOfGiftToOrder(agent) {
     };
 
     request.get(options).then(result => {
+
         result.products.forEach(function (productlist) {
             var productlistName = productlist.name;
             var productPreviewUrl = productlist.preview_url;
-            agent.add(" Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);
+            agent.add("Select something from below gifts \n"+" Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);
             console.log(productlistName);
         });
-
 
         return Promise.resolve(agent);
     }).catch((err) => console.error('something went wrong on the handleTypeOfGiftToOrder: Error'));
