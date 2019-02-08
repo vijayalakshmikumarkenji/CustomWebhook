@@ -43,7 +43,7 @@ function handleagreedtoshowproductlist(agent) {
          // JSON.parse(body)
           body.categories.forEach(function (productlist) {
             var productlistName = productlist.title;
-            finalProductList = productlistName + " "+finalProductList;
+            finalProductList = productlistName + "\n"+finalProductList;
             
         });
         console.log("final product list is :" + finalProductList);
