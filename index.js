@@ -6,6 +6,10 @@ const { actionssdk } = require('actions-on-google');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const restService = express();
 const request = require('request-promise-native');
+const os = require("os");
+
+
+
 var username = "";
 const utilConstants = require('./utilConstants');
 restService.use(
@@ -40,32 +44,32 @@ function handleagreedtoshowproductlist(agent) {
 
     return new Promise((resolve, reject) => {
         request.get(options, (error, response, body) => {
-         // JSON.parse(body)
-          body.categories.forEach(function (productlist) {
-            var productlistName = productlist.title;
-            finalProductList = productlistName + "\n"+finalProductList;
-            
-        });
-        console.log("final product list is :" + finalProductList);
-          agent.add(finalProductList);
-          resolve();
-        });
-      });
+            // JSON.parse(body)
+            body.categories.forEach(function (productlist) {
+                var productlistName = productlist.title;
+                finalProductList = productlistName + os.EOL + finalProductList;
 
-   /** request.get(options).then(result => {
-
-        result.categories.forEach(function (productlist) {
-            var productlistName = productlist.title;
-            finalProductList = productlistName + " "+finalProductList;
-            
+            });
+            console.log("final product list is :" + finalProductList);
+            agent.add(finalProductList);
+            resolve();
         });
+    });
 
-    }).catch(err => {
-        console.error("Something wrong happened");
-    })
-    console.log("final product list is :" + finalProductList);
-    agent.add(finalProductList);
-    return Promise.resolve(agent);*/
+    /** request.get(options).then(result => {
+ 
+         result.categories.forEach(function (productlist) {
+             var productlistName = productlist.title;
+             finalProductList = productlistName + " "+finalProductList;
+             
+         });
+ 
+     }).catch(err => {
+         console.error("Something wrong happened");
+     })
+     console.log("final product list is :" + finalProductList);
+     agent.add(finalProductList);
+     return Promise.resolve(agent);*/
 }
 
 function handleUsernameRequest(agent) {
