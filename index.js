@@ -7,7 +7,7 @@ const { WebhookClient } = require('dialogflow-fulfillment');
 const restService = express();
 const request = require('request-promise-native');
 var username = "";
-const utilConstants = require('utilConstants');
+const utilConstants = require('./utilConstants');
 restService.use(
     bodyParser.urlencoded({
         extended: true
