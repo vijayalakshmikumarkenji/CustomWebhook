@@ -41,7 +41,8 @@ function handleTypeOfGiftToOrder(agent) {
     request.get(options).then(result => {
         console.log("product lists json :" + result);
         let productList = JSON.parse(result);
-        console.log("product lists json :" + productList);
+        console.log("resulkt length :" + result.length);
+        console.log("productList :" + productList.length);
         return Promise.resolve(agent);
     }).catch((err) => console.error('something went wrong on the handleTypeOfGiftToOrder: Error'));
 
