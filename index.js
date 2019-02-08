@@ -37,7 +37,22 @@ function handleagreedtoshowproductlist(agent) {
         json: true
     };
 
-    request.get(options).then(result => {
+
+    return new Promise((resolve, reject) => {
+        request.get(options, (error, response, body) => {
+         // JSON.parse(body)
+          body.categories.forEach(function (productlist) {
+            var productlistName = productlist.title;
+            finalProductList = productlistName + " "+finalProductList;
+            
+        });
+        console.log("final product list is :" + finalProductList);
+          agent.add(finalProductList);
+          resolve();
+        });
+      });
+
+   /** request.get(options).then(result => {
 
         result.categories.forEach(function (productlist) {
             var productlistName = productlist.title;
@@ -50,7 +65,7 @@ function handleagreedtoshowproductlist(agent) {
     })
     console.log("final product list is :" + finalProductList);
     agent.add(finalProductList);
-    return Promise.resolve(agent);
+    return Promise.resolve(agent);*/
 }
 
 function handleUsernameRequest(agent) {
