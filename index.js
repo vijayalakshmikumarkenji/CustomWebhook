@@ -43,7 +43,7 @@ function handleTypeOfGiftToOrder(agent) {
         result.products.forEach(function (productlist) {
             var productlistName = productlist.name;
             var productPreviewUrl = productlist.preview_url;
-            agent.add("Select something from below gifts " + " Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);            
+            //agent.add("Select something from below gifts " + " Product name is " + productlistName + " and you can find the product image in :" + productPreviewUrl);            
         });
         
         return Promise.resolve(agent);
